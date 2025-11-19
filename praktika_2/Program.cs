@@ -314,6 +314,36 @@ namespace praktika_2
             // Закрываем файл
             SW.Close();
         }
+        /// <summary> Загрузка результата
+        public static void LoadLeaders()
+        {
+            // Проверяем что есть файл
+            if (File.Exists("./leaders.txt"))
+            {
+                // Открываем файл
+                StreamReader SR = new StreamReader("./leaders.txt");
+                // читаем первую строку
+                string json = SR.ReadLine();
+                // Закрываем файл
+                SR.Close();
+                // Если есть что читать
+                if (!string.IsNullOrEmpty(json))
+                {
+                    // Преобразуем строку в объект
+                    Leaders = JsonConvert.DeserializeObject<List<Leaders>>(json);
+                }
+                else
+                {
+                    // Возвращаем пустой результат
+                    Leaders = new List<Leaders>();
+                }
+            }
+            else
+            {
+                // Возвращаем пустой результат
+                Leaders = new List<Leaders>();
+            }
+        }
 
 
     }
