@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -301,6 +302,19 @@ namespace praktika_2
                 }
             }
         }
+        /// <summary> Сохранение результата
+        public static void SaveLeaders()
+        {
+            // Преобразуем данные игроков в JSON
+            string json = JsonConvert.SerializeObject(Leaders);
+            // Записываем в файл
+            StreamWriter SW = new StreamWriter("./leaders.txt");
+            // Пишем строку
+            SW.WriteLine(json);
+            // Закрываем файл
+            SW.Close();
+        }
+
 
     }
 }
