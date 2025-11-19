@@ -91,13 +91,6 @@ namespace praktika_2
                             viewModelGames[IdPlayer].SnakesPlayers.direction = Snakes.Direction.Left;
                             else if (dataMessage[0] == "Right" && viewModelGames[IdPlayer].SnakesPlayers.direction != Snakes.Direction.Left)
                                 viewModelGames[IdPlayer].SnakesPlayers.direction = Snakes.Direction.Right;
-
-
-
-
-
-
-
                         }
 
                     }
@@ -109,11 +102,34 @@ namespace praktika_2
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Возникло исключение: " + ex.ToString() + "\n" + ex.Message);
-
-
             }
-
         }
+        public static int AddSnake()
+        {
+            ViewModelGames viewModelGamesPlayer = new ViewModelGames();
 
+            // Указываем стартовые координаты змеи
+            viewModelGamesPlayer.SnakesPlayers = new Snakes()
+            {
+                // Точки змеи
+                Points = new List<Snakes.Point>()
+        {
+            new Snakes.Point() { X = 30, Y = 10 },
+            new Snakes.Point() { X = 20, Y = 10 },
+            new Snakes.Point() { X = 10, Y = 10 },
+        },
+                // Направление змеи
+                direction = Snakes.Direction.Start
+            };
+
+            // Создаём рандомную точку на карте
+            viewModelGamesPlayer.Points = new Snakes.Point(new Random().Next(10, 783), new Random().Next(10, 410));
+
+            // Добавляем змей в список всех змей
+            viewModelGames.Add(viewModelGamesPlayer);
+
+            // Возвращаем ID змеи чтобы связать игрока и змею
+            return viewModelGames.FindIndex(x => x == viewModelGamesPlayer);
         }
+    }
 }
