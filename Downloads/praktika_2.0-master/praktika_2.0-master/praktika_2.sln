@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "praktika_2", "praktika_2\pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{C50280B6-B064-4C80-BF4A-31AACF1BF441}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeWpf", "SnakeWpf\SnakeWpf.csproj", "{A900C5BA-5B80-49B3-86FF-811D673AD2FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C50280B6-B064-4C80-BF4A-31AACF1BF441}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C50280B6-B064-4C80-BF4A-31AACF1BF441}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C50280B6-B064-4C80-BF4A-31AACF1BF441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A900C5BA-5B80-49B3-86FF-811D673AD2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A900C5BA-5B80-49B3-86FF-811D673AD2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A900C5BA-5B80-49B3-86FF-811D673AD2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A900C5BA-5B80-49B3-86FF-811D673AD2FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
