@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Common;
+using System.Windows.Media.Animation;
 
 namespace SnakeWpf
 {
@@ -51,6 +52,44 @@ namespace SnakeWpf
 
         
         public SnakeWPF.Pages.Game Game = new SnakeWPF.Pages.Game();
+        /// <summary> Начинаем слушать ответы от сервера
+        public void StartReceiver()
+        {
+            // Создаём поток для прослушивания канала
+            tRec = new Thread(new ThreadStart(Receiver));
+            // Запускаем поток
+            tRec.Start();
+        }
+        /// <summary> Открываем страницу Home
+        public void OpenPage(Page PageOpen)
+        {
+            // Создаём анимацию
+            DoubleAnimation startAnimation = new DoubleAnimation();
+            // Задаём начальное значение анимации
+            startAnimation.From = 1;
+            // Задаём конечное значение анимации
+            startAnimation.To = 0;
+            // Задаём время анимации
+            startAnimation.Duration = TimeSpan.FromSeconds(0.6);
+            // Подписываемся на выолнение анимации
+            startAnimation.Completed += delegate
+            {
+                // Переключаем страницу
+                frame.Navigate(PageOpen);
+                // Создаём конечную анимацию
+                DoubleAnimation endAnimation = new DoubleAnimation();
+                // Задаём начальное значение анимации
+                endAnimation.From = 0;
+                // Задаём конечное значение анимации
+                endAnimation.To = 1;
+                // Задаём время анимации
+                endAnimation.Duration = TimeSpan.FromSeconds(0.6);
+                // Воспроизводим анимацию на frame, анимация прозрачности
+                frame.BeginAnimation(OpacityProperty, endAnimation);
+            };
+            // Воспроизводим анимацию на frame, анимация прозрачности
+            frame.BeginAnimation(OpacityProperty, startAnimation);
+        }
 
         public MainWindow()
         {
