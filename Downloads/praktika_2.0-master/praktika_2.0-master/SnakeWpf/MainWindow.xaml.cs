@@ -215,10 +215,15 @@ namespace SnakeWpf
             // останавливаем поток
             tRec.Abort();
         }
-
         public MainWindow()
         {
             InitializeComponent();
+            // Запоминаем MainWindow в переменную, чтобы обращаться в случае чего
+            mainWindow = this;
+            // Открываем начальную страницу
+            OpenPage(Home);
         }
+
+       
     }
 }
