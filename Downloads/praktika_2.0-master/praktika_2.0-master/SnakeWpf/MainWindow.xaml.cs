@@ -157,7 +157,7 @@ namespace SnakeWpf
                         Dispatcher.Invoke(() =>
                         {
                             // Открываем окно с окончанием игры
-                            OpenPage(new Pages.EndGame());
+                            OpenPage(new SnakeWPF.Pages.EndGame());
                         });
                     }
                     else
@@ -171,6 +171,40 @@ namespace SnakeWpf
             {
                 // Если что-то пошло не по плану, выводим ошибку в консоль проекта
                 Debug.WriteLine("Возникло исключение: " + ex.ToString() + "\n " + ex.Message);
+            }
+        }
+        /// <summary> Управление змеёй
+        private void EventKeyUp(object sender, KeyEventArgs e)
+        {
+            // Проверяем что у игрока есть IP адрес, порт, данные о змее, и что змея не проиграла
+            if (!string.IsNullOrEmpty(ViewModelUserSettings.IPAddress) &&
+                !string.IsNullOrEmpty(ViewModelUserSettings.Port) &&
+                (ViewModelGames != null && !ViewModelGames.SnakesPlayers.GameOver))
+            {
+                // Если нажата клавиша вверх
+                if (e.Key == Key.Up)
+                {
+                    // Отправляем на сервер сообщение о том что команда вверх и данные игрока
+                    Send($"Up|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+                // Если нажата клавиша вниз
+                else if (e.Key == Key.Down)
+                {
+                    // Отправляем на сервер сообщение о том что команда вниз и данные игрока
+                    Send($"Down|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+                // Если нажата клавиша влево
+                else if (e.Key == Key.Left)
+                {
+                    // Отправляем на сервер сообщение о том что команда влево и данные игрока
+                    Send($"Left|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
+                // Если нажата клавиша вправо
+                else if (e.Key == Key.Right)
+                {
+                    // Отправляем на сервер сообщение о том что команда вправо и данные игрока
+                    Send($"Right|{JsonConvert.SerializeObject(ViewModelUserSettings)}");
+                }
             }
         }
 
