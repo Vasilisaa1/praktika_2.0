@@ -9,6 +9,54 @@
       Title="EndGame">
 
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/image/bacground1.jpg"/>
+        </Grid.Background>
+        <Grid>
+            <Grid Width="320"
+                  Height="200"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/image/fon1.jpg"/>
+                </Grid.Background>
+                <Label
+                    Foreground= "White"
+                    x:Name="name"
+                    Content="Alexashchka"
+                    Margin="45,18,45,0"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    FontFamily="Forte"
+                    FontSize="16"/>
+                <Label
+                    Foreground= "White"
+                    x:Name="glasses"
+                    Content="90 glasses"
+                    Margin="45,50,45,0"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    FontFamily="Forte"/>
+                <Button Click="OpenHome"
+                    Content="Main Menu"
+                    HorizontalAlignment="Left"
+                    Margin="45,0,0,10"
+                    VerticalAlignment="Bottom"
+                    Width="230"
+                    Height="25"
+                    FontFamily="Forte"/>
+                <Label
+                    Foreground= "White"
+                    x:Name="top"
+                    Content="999"
+                    Margin="45,76,45,0"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    FontFamily="Forte"
+                    Height="84"
+                    VerticalContentAlignment="Center"
+                    FontSize="48"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

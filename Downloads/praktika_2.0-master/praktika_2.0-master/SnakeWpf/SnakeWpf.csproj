@@ -119,5 +119,14 @@
     <Resource Include="image\bacground1.jpg" />
     <Resource Include="image\fon1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\trava.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{C50280B6-B064-4C80-BF4A-31AACF1BF441}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
