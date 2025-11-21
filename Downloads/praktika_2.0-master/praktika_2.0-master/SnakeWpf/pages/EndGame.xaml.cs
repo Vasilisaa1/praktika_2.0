@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SnakeWpf;
 
 namespace SnakeWPF.Pages
 {
@@ -23,6 +24,19 @@ namespace SnakeWPF.Pages
         public EndGame()
         {
             InitializeComponent();
+            // выводим наименование игрока
+            name.Content = MainWindow.mainWindow.ViewModelUserSettings.Name;
+            // выводи место игрока среди всего списка
+            top.Content = MainWindow.mainWindow.ViewModelGames.Top;
+            // выводим сколько очков набрал игрок
+            glasses.Content = $"{MainWindow.mainWindow.ViewModelGames.SnakesPlayers.Points.Count - 3} glasses";
+            // Закрываем соединение
+            MainWindow.mainWindow.receivingUdpClient.Close();
+            // останавливаем поток
+            MainWindow.mainWindow.tRec.Abort();
+            // Обнуляем данные о змее
+            MainWindow.mainWindow.ViewModelGames = null;
         }
+
     }
 }
