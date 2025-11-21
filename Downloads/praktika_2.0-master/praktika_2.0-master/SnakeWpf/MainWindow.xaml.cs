@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Common;
 using System.Windows.Media.Animation;
+using System.Diagnostics;
 
 namespace SnakeWpf
 {
@@ -89,6 +90,62 @@ namespace SnakeWpf
             };
             // Воспроизводим анимацию на frame, анимация прозрачности
             frame.BeginAnimation(OpacityProperty, startAnimation);
+        }
+        /// <summary> Прослушиваем канал
+        public void Receiver()
+        {
+            // Создаём клиент для прослушивания
+            receivingUdpClient = new UdpClient(int.Parse(ViewModelUserSettings.Port));
+            // Конечная сетевая точка
+            IPEndPoint RemoteIpEndPoint = null;
+
+            try
+            {
+                // Слушаем постоянно
+                while (true)
+                {
+                    // Ожидание дейтаграммы
+                    byte[] receiveBytes = receivingUdpClient.Receive(
+                        ref RemoteIpEndPoint);
+
+                    // Преобразуем и отображаем данные
+                    string returnData = Encoding.UTF8.GetString(receiveBytes);
+
+                    // Если у нас не существует данных от сервера (значит мы тольконачали игру и нам необходимо сменить экран
+                    if (ViewModelGames == null)
+                    {
+                        // Говорим что выполняем вне потока
+                        Dispatcher.Invoke(() =>
+                        {
+                            // Открываем окно с игрой
+                            OpenPage(Game);
+                        });
+                    }
+
+                    // Конвертируем данные в модель
+                    ViewModelGames = JsonConvert.DeserializeObject<ViewModelGames>(returnData.ToString());
+                    // Если игрок проиграл
+                    if (ViewModelGames.SnakesPlayers.GameOver)
+                    {
+                        // Выполняем вне потока
+                        Dispatcher.Invoke(() =>
+                        {
+                            // Открываем окно с окончанием игры
+                            OpenPage(new Pages.EndGame());
+                        });
+                    }
+                    else
+                    {
+                        // Вызываем создание UI
+                        Game.CreateUI();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Если что-то пошло не по плану, выводим ошибку в консоль проекта
+                Debug.WriteLine("Возникло исключение: " + ex.ToString() + "\n " + ex.Message);
+            }
         }
 
         public MainWindow()
